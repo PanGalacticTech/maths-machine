@@ -20,10 +20,16 @@ https://www.tutorialspoint.com/how-to-plot-a-function-defined-with-def-in-python
 
 import math
 import matplotlib
+import numpy as np
+from matplotlib import pyplot as plt
+
+plt.rcParams["figure.figsize"] = [10, 10]
+plt.rcParams["figure.autolayout"] = True
 
 
-real = 10
-imaginary = 10
+
+real = 7
+imaginary =7
 
 def complex_num_main():
     print("Complex Number Calculations")
@@ -32,6 +38,7 @@ def complex_num_main():
     print(return_theta(real,imaginary))
     print(return_polar(real, imaginary))
     print(return_exponential(real,imaginary))
+    plot_xy(real,imaginary)
 
 
 def return_r(real, imaginary):
@@ -80,3 +87,17 @@ def return_exponential(real, imaginary):
     theta = round(theta, 4)
     Z = make_exponential(r, theta)
     return Z
+
+def plot_xy(x, y):
+    #size and colour
+    size = 20
+    color = np.arange(-8,8)*20
+    #plot
+    fig, ax = plt.subplots()
+    gridlinex = np.arange(-8,8)
+    gridliney= np.arange(-8,8)
+
+    ax.scatter(gridlinex, gridliney, s=size, c=color, vmin=0, vmax=100)
+    #ax.scatter(x,y, s=size, c=color, vmin=0,vmax=100)
+    ax.set(xlim=(-8,8),xticks=np.arange(-8,9),ylim=(-8,8), yticks=np.arange(-8,9))
+    plt.show()

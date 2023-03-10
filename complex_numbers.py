@@ -14,7 +14,13 @@ y = r sin(theta)
 https://byjus.com/maths/polar-form-of-complex-numbers/#:~:text=The%20polar%20form%20of%20a,combination%20of%20modulus%20and%20argument.
 '''
 
+'''
+https://www.tutorialspoint.com/how-to-plot-a-function-defined-with-def-in-python-matplotlib
+'''
+
 import math
+import matplotlib
+
 
 real = 10
 imaginary = 10

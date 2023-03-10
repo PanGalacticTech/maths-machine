@@ -16,6 +16,7 @@
 
 '''
 
+import complex_numbers as cm
 
 
 
@@ -27,7 +28,7 @@ def decimal_binary(decimal_int, min_len=4):
         new_val = int(new_val / 2)
         #binary_list.append(remainder)
         binary_list.insert(0, remainder)  ## Insert at the front of the list
-        #print(f"Initial Int: {decimal_int}, new_val: {new_val}, remainder:{remainder}, binary:{binary_list}")
+        print(f"Initial Int: {decimal_int}, new_val: {new_val}, remainder:{remainder}, binary:{binary_list}")
         decimal_int = new_val
     print("Binary Out:")
     length = len(binary_list)
@@ -70,6 +71,8 @@ def chunks(string, n):
         chunk_list.append(string[i:i + n])
     return chunk_list
 
+def reversed_string(a_string):
+    return a_string[::-1]
 
 def binary_decimal(binary_str):
     print(F"Initial Binary: {binary_str}")
@@ -106,7 +109,32 @@ def binary_octal(binary_str):             ## Pass binary as a string
     print("\n")
     return octal_list
 
-hex_list = ["0", "1", "2", "3", "4", "5", "6", "7", "8" ,"9","A","B","C","D", "E", "F", "NULL"]
+hex_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8" ,"9","A","B","C","D", "E", "F", "NULL"]
+
+hex_list = ["B0A", "B05", "B00"]
+
+def hex_decimal(hex_list):
+    list_num = 0
+    for i in (hex_list):
+        decimal_total = 0
+        print(f"Initial Hex {list_num}: {i}")
+        # First string must be reversed so LSB is processed first
+        r_hex_string = reversed_string(i)
+        print(f"Reversed hex String: {r_hex_string}")
+        char_num = 0 # Iteration variable, will be used for labelling and as a power of 16
+        for j in r_hex_string:
+            k = 0
+            print(f"hex 16^{char_num}: {j}")
+            while hex_chars[k] != j.upper():
+                k = k + 1  ## Increment through the list untill a match is found
+            print(f"Decimal 16^{char_num}: {k}")  ## Whichever increment was landed on is the decimal for the hex character
+            # This must be multiplied by 16 to the power of char_num
+            value = int(k)*(16**char_num)
+            print(f"Decimal Value: {value}")
+            decimal_total = decimal_total + value
+            char_num += 1
+        print(f"\nDecimal {list_num} Total = {decimal_total}\n")
+        list_num += 1
 
 def hex_binary(hex_str):
     binary_list = []
@@ -114,7 +142,7 @@ def hex_binary(hex_str):
     for i in hex_str:
         j = 0
         print(f"hex: {i}")
-        while hex_list[j] != i.upper():
+        while hex_chars[j] != i.upper():
             j = j+1    ## Increment through the list untill a match is found
         print(f"Decimal: {j}")  ## Whichever increment was landed on is the decimal for the hex character
         binary_list.append(decimal_binary(j))
@@ -123,6 +151,9 @@ def hex_binary(hex_str):
         for l in k:
             print(l, end="")
     return binary_list
+
+
+
 
 
 def decimal_hex(decimal_int):
@@ -134,7 +165,7 @@ def decimal_hex(decimal_int):
         print(f"Remainder: {remainder}")
         new_val = int(new_val / 16)
         # binary_list.append(remainder)
-        hex_str_list.insert(0, hex_list[remainder])  ## Insert at the front of the list
+        hex_str_list.insert(0, hex_chars[remainder])  ## Insert at the front of the list
         print(f"Initial Int: {decimal_int}, new_val: {new_val}, remainder:{remainder}, hex:{hex_str_list}")
     print("Hex Out: ")
     for i in hex_str_list:
@@ -148,8 +179,10 @@ def decimal_hex(decimal_int):
 
 
 def main():
-    decimal_hex(binary_decimal("100011100011"))
-
+    cm.complex_num_main()
+    #decimal_hex(binary_decimal("100011100011"))
+    #decimal_hex(2806)
+    #hex_decimal(hex_list)
 
 
     #hex_binary("128")
@@ -157,7 +190,7 @@ def main():
     #binary_decimal("101110")
 
     #octal_binary(125)
-    #decimal_binary(101)
+    #decimal_binary(45)
 
 
 
